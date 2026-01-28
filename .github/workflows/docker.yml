@@ -12,19 +12,10 @@ jobs:
 
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-latest]
+        os: [ubuntu-latest]
 
     steps:
     - uses: actions/checkout@v5
-
-    - name: Set up Docker on macOS
-      if: runner.os == 'macOS'
-      run: |
-        brew install --cask docker
-        open /Applications/Docker.app
-        while ! docker system info > /dev/null 2>&1; do
-            sleep 1
-        done
 
     - name: Build Docker image
       run: docker build -t ci_basic_github_typescript .
